@@ -18,16 +18,10 @@ public class ResourceServerConf extends ResourceServerConfigurerAdapter {
     @Resource
     private TokenStore tokenStore;
 
-//    private static final String RESOURCE_ID = "app";
-
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) {
         resources
-                // 资源id
-//                .resourceId(RESOURCE_ID)
-                // 使用远程服务验证token
-//                .tokenServices(tokenServices())
-                // 配合授权服务器提供的私钥自己验证token
+                // 配合授权服务器提供的公钥签名自己验证token
                 .tokenStore(tokenStore)
                 // 无状态模式
                 .stateless(false);
@@ -36,12 +30,9 @@ public class ResourceServerConf extends ResourceServerConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                // 需要校验的路径
+                // 需要认证才能请求的路径
                 .antMatchers("/token/**")
-                // 需要匹配scope
-                .access("#oauth2.hasScope('all')")
-                .antMatchers("/access/**")
-                .permitAll()
+                .authenticated()
                 .and().csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
