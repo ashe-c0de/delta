@@ -34,6 +34,8 @@ public class ResourceServerConf extends ResourceServerConfigurerAdapter {
                 .antMatchers("/token/**")
                 .authenticated()
                 .and().csrf().disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                // 关闭默认登录页
+                .and().formLogin().disable();
     }
 }
