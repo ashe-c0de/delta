@@ -28,6 +28,7 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!-- ===========================以下均为资源服务器需要额外引入的依赖=========================== -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
@@ -47,7 +48,7 @@
 			<version>1.0.10.RELEASE</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt -->
+		<!-- 解析jwtToken -->
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt</artifactId>
